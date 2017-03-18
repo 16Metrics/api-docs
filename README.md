@@ -1,7 +1,7 @@
 api-docs
 ========
-
 This repository contains the API Docs for all public APIs of 16Metrics.com. The API is based on REST principles and conforms to Rest verbage. Currently, response format for all endpoints is JSON.   
+
 Basics
 ------
 * [Readme](https://github.com/16Metrics/api-docs/blob/master/README.md)
