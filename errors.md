@@ -1,17 +1,17 @@
 Errors
 ======
 
-If an error occured the result of the API call will be a JSON with the following format
+If an error occurs the result of the API call will be a JSON array with the following format...   
 ```[<error_code>, <error_message>]```
 
 Code Reference
 --------------
 <table>
-    <th>
-        <td>Code</td>
-        <td>Message</td>
-        <td>Meaning</td>
-    </th>
+    <tr>
+        <th>Code</th>
+        <th>Message</th>
+        <th>Meaning</th>
+    </tr>
     <tr>
         <td>200</td>
         <td>*API specific messages*</td>
