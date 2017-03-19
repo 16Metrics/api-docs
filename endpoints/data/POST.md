@@ -1,12 +1,12 @@
 data - POST
 ===========
 
-This endpoint is used to push custom data to the event store for your account on app.16Metrics.com. Authentication required. Recommended to be used only on server side.   
+This endpoint is used to push custom data to the event store for your account on app.16Metrics.com. Recommended to be used only on server side.   
 
 Authentication
 --------------
 
-Authentication is required. The following parameters are required.
+Authentication is required. The following parameters should be sent for the request to be successful.
 <table>
     <tr>
         <th>Name</th>
@@ -28,7 +28,7 @@ Authentication is required. The following parameters are required.
 Entity Reference - Payment Event
 --------------------------------
 
-The fields marked with * are compulsory. Additional custom fields can be pushed. Please ensure that there is no conflict with the field names mentioned below and that every custom field name has the prefix ```CS_```
+Payment events are pushed event for failed events. The fields marked with * are compulsory. Additional custom fields can be pushed. Please ensure that there is no conflict with the field names mentioned below and that every custom field name has the prefix ```CF_```
 <table>
     <tr>
         <th>Name</th>
@@ -88,7 +88,7 @@ The fields marked with * are compulsory. Additional custom fields can be pushed.
     <tr>
         <td>product.validity</td>
         <td>integer</td>
-        <td>SaaS only field. The number of months that this plan is valid for</td>
+        <td>SaaS only field. The number of months that the subscription plan is valid for</td>
     </tr>
     <tr>
         <td>status</td>
@@ -127,8 +127,7 @@ The fields marked with * are compulsory. Additional custom fields can be pushed.
     </tr>
 </table>
 
-Sample Event - Payment
-----------------------
+Below is a sample of the payment event...   
 ```
     {
         "status" : "success",
@@ -160,4 +159,123 @@ Sample Event - Payment
         },
         "event" : "payment"
     }
+```
+
+Entity Reference - Refund Event
+-------------------------------
+
+Refund event is pushed on successful refund. The fields marked with * are compulsory. Additional custom fields can be pushed. Please ensure that there is no conflict with the field names mentioned below and that every custom field name has the prefix ```CF_```
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description/Value</th>
+    </tr>
+    <tr>
+        <td>charge_id</td>
+        <td>string</td>
+        <td>Your unique id of the payment/charge for which you are initiating this refund</td>
+    </tr>
+    <tr>
+        <td>customer.city</td>
+        <td>string</td>
+        <td>City of your customer</td>
+    </tr>
+    <tr>
+        <td>customer.email *</td>
+        <td>email</td>
+        <td>Email address of your customer. All grouping is based on this field</td>
+    </tr>
+    <tr>
+        <td>customer.id</td>
+        <td>string</td>
+        <td>Your unique id for this customer</td>
+    </tr>
+    <tr>
+        <td>event</td>
+        <td>string</td>
+        <td>refund</td>
+    </tr>
+    <tr>
+        <td>event_id</td>
+        <td>string</td>
+        <td>Your unique id for this event</td>
+    </tr>
+    <tr>
+        <td>payment_mode.bank</td>
+        <td>string</td>
+        <td>Name of the bank processing this charge</td>
+    </tr>
+    <tr>
+        <td>payment_mode.brand</td>
+        <td>string</td>
+        <td>Visa/Master Card/Maestro etc.</td>
+    </tr>
+    <tr>
+        <td>payment_mode.method</td>
+        <td>string</td>
+        <td>card/cash/net banking etc.</td>
+    </tr>
+    <tr>
+        <td>payment_mode.type</td>
+        <td>string</td>
+        <td>Type of card. Mostly for card method. credit/debit</td>
+    </tr>
+    <tr>
+        <td>product.name</td>
+        <td>string</td>
+        <td>Name of the product or subscription plan</td>
+    </tr>
+    <tr>
+        <td>transaction.amount</td>
+        <td>integer</td>
+        <td>Total amount paid in the smallest unit of the currency you are using. Ex. 2500 for 25 USD.</td>
+    </tr>
+    <tr>
+        <td>transaction.currency</td>
+        <td>integer</td>
+        <td>Currency that this transaction is completed in. This field is currently not used as currency is derived from your account information</td>
+    </tr>
+    <tr>
+        <td>transaction.mul_factor</td>
+        <td>integer</td>
+        <td>This is the factor for converting between storage unit and display unit for the amount. Ex. 1 USD = 100 Cents, therefore the value is 100</td>
+    </tr>
+    <tr>
+        <td>when.UTC *</td>
+        <td>timestamp/integer</td>
+        <td>Time of transaction. Seconds since epoch in UTC</td>
+    </tr>
+</table>
+
+Below is a sample of the refund event...   
+```
+{
+    "customer" : {
+        "city" : "",
+        "id" : "cus_9ZBsP4fEfuekIa",
+        "email" : "test@example.org"
+    },
+    "product" : {
+        "name" : "Silver"
+    },
+    "transaction" : {
+        "currency" : "usd",
+        "amount" : 500,
+        "mul_factor" : 100,
+        "accrual" : [ ]
+    },
+    "event_id" : "re_19aQfbECK8l3Nmz3zEyZHt2a",
+    "when" : {
+        "UTC" : 1489876755
+    },
+    "charge_id" : "ch_19G3YUECK8l3Nmz3aFn2U0gE",
+    "payment_mode" : {
+        "brand" : "Visa",
+        "type" : "unknown",
+        "method" : "card",
+        "bank" : ""
+    },
+    "event" : "refund"
+}
 ```
