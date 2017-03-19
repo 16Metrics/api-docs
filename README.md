@@ -12,7 +12,7 @@ Basics
 
 Endpoints
 ---------
-- **[<code>POST</code> data](https://github.com/16Metrics/api-docs/blob/master/endpoints/data/POST.md)**
+- **[<code>POST</code> data](https://github.com/16Metrics/api-docs/blob/master/endpoints/data/POST.md)** - Push custom payments and refund events to your event store
 
 Support
 -------
