@@ -28,7 +28,7 @@ Authentication is required. The following parameters should be sent for the requ
 Entity Reference - Payment Event
 --------------------------------
 
-Payment events are pushed event for failed events. The fields marked with * are compulsory. Additional custom fields can be pushed. Please ensure that there is no conflict with the field names mentioned below and that every custom field name has the prefix ```CF_```
+Payment events are pushed even for failed events. The fields marked with * are compulsory. Additional custom fields can be pushed. Please ensure that there is no conflict with the field names mentioned below and that every custom field name has the prefix ```CF_```
 <table>
     <tr>
         <th>Name</th>
@@ -127,7 +127,7 @@ Payment events are pushed event for failed events. The fields marked with * are 
     </tr>
 </table>
 
-Below is a sample of the payment event...   
+Below is a sample payment event...   
 ```
     {
         "status" : "success",
@@ -248,7 +248,7 @@ Refund event is pushed on successful refund. The fields marked with * are compul
     </tr>
 </table>
 
-Below is a sample of the refund event...   
+Below is a sample refund event...   
 ```
 {
     "customer" : {
