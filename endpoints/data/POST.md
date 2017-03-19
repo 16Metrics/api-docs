@@ -1,4 +1,4 @@
-data - POST
+/data - POST
 ===========
 
 This endpoint is used to push custom data to the event store for your account on app.16Metrics.com. Recommended to be used only on server side.   
